@@ -3,16 +3,17 @@
 This is a project where you can solve the ultimate pit limit problem by performing the pseudoflow algorithm developed by Ford and Fulkerson. Thus, if you want to clone it, run cmd on your folder and write `<streamlit run app.py>`.
 
 ## Content:
-[1. What is Ford and Fulkerson?](#s1)
-[2. Features of the app](#s2)
-[3. Project Limitations ](#s3)
-[4. Future development ](#s4)
+*[1. What is Ford and Fulkerson?](#s1)
+*[2. Features of the app](#s2)
+*[3. Project Limitations ](#s3)
+*[4. Future development ](#s4)
 
 
 <h3 id = "s1"> 1. What is Ford and Fulkerson? </h3>
-> Must read articles:
-- [I'm an inline-style link with title](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext "A proposal to find the ultimate pit using Ford Fulkerson algorithm")
-- [I'm an inline-style link with title](https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/GEOVIA/PDF/whitepaper/2017-GEOVIA-WHITEPAPER-PSEUDOFLOW.pdf "PSEUDOFLOW METHOD FOR PIT OPTIMIZATION - Whittle")
+    > Must read articles:
+    -  "A proposal to find the ultimate pit using Ford Fulkerson algorithm" [link](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext)
+
+    - [I'm an inline-style link with title](https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/GEOVIA/PDF/whitepaper/2017-GEOVIA-WHITEPAPER-PSEUDOFLOW.pdf "PSEUDOFLOW METHOD FOR PIT OPTIMIZATION - Whittle")
 
     That is an algorithm that helps people to solve the 3D Ultimate Pit Limit problem, firstly introduced by Learch & Grossman in 1963 with Graph Theory.
 
