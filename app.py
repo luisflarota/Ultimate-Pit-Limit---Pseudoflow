@@ -24,7 +24,7 @@ def main():
     elif say_no:
         #if st.sidebar.radio('',['Choose default file']):
         st.sidebar.success('Loading default file')
-        load_file('nuevog.csv')
+        load_file('block_model_test.csv')
     elif say_yes:
         file_= st.sidebar.file_uploader('*Upload or drop the file:')
         if file_:
