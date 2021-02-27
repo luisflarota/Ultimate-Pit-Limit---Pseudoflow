@@ -1,4 +1,5 @@
 ### Ultimate Pit Limit Solved by Using Pseudoflow Algorithm
+
 This is a project where you can solve the ultimate pit limit problem by performing the pseudoflow algorithm developed by Ford and Fulkerson. Thus, if you want to clone it, run cmd on your folder and write `<streamlit run app.py>`.
 
 ## Content:
@@ -54,3 +55,4 @@ This is a project where you can solve the ultimate pit limit problem by performi
     ** Therefore, we can implement the overall slope angle feature that will be used to set precedences** There are papers to follow that issue.
 ### 4. Future development?
     -  [I'm an inline-style link with title](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext "R. Khalokakaie, P. A. Dowd & R. J. Fowell in 2001") wrote a paper where they add variable slope angles in LG algorithm. **I am trying to follow the paper to add that feature** So you can play and **HOPE IT HELPS!**
+
