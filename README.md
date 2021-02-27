@@ -10,8 +10,10 @@ This is a project where you can solve the ultimate pit limit problem by performi
 
 
 <h3 id = "s1"> 1. What is Ford and Fulkerson? </h3>
-    > Must read articles:
-    -  "A proposal to find the ultimate pit using Ford Fulkerson algorithm" [link](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext)
+
+* Must read articles 
+- "A proposal to find the ultimate pit using Ford Fulkerson algorithm" [link](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext)
+
 
     - [I'm an inline-style link with title](https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/GEOVIA/PDF/whitepaper/2017-GEOVIA-WHITEPAPER-PSEUDOFLOW.pdf "PSEUDOFLOW METHOD FOR PIT OPTIMIZATION - Whittle")
 
