@@ -3,7 +3,7 @@
 This is a project where you can solve the ultimate pit limit problem by performing the pseudoflow algorithm developed by Ford and Fulkerson. Thus, if you want to clone it, run cmd on your folder and write `<streamlit run app.py>`.
 
 ## Content:
-    [1. What is Ford and Fulkerson? ][### 1. What is Ford and Fulkerson?]
+    [1. What is Ford and Fulkerson? ](### 1. What is Ford and Fulkerson?)
     [2. Features of the app][### 2. Features of the app?]
     [3. Project Limitations ][### 3. Project Limitations?]
     [4. Future development ][### 4. Future development?]
