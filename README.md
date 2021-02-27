@@ -3,6 +3,7 @@
 This is a project where you can solve the ultimate pit limit problem by performing the pseudoflow algorithm developed by Ford and Fulkerson. Thus, if you want to clone it, run cmd on your folder and write `<streamlit run app.py>`.
 
 <h2> Content </h2>
+
 * [1. What is Ford and Fulkerson?](#s1)
 * [2. Features of the app](#s2)
 * [3. Project Limitations ](#s3)
@@ -46,17 +47,26 @@ This is a project where you can solve the ultimate pit limit problem by performi
      - Blocks' coordinates that are out of the big block, meaning that the **block chosen does not belong to the block formed by all blocks**
      - Blocks' coordinates that are not in the **gravity center** of the proper block
 
+
+
 * **Visualize the block model:**
     ![visualize](https://user-images.githubusercontent.com/64980133/109393924-5f3a3100-78f2-11eb-86dc-bb77fcb2518c.png)
+
+
 
 * **Visualize Grade - Tonnage Distribution:**
     ![gtd](https://user-images.githubusercontent.com/64980133/109393968-8ee93900-78f2-11eb-88e4-9d3fbe7ac45f.png)
 
+
+
 * **Parameters to get the blocks' value + Ultimate Pit Limit problem:**
     ![upl](https://user-images.githubusercontent.com/64980133/109394014-cb1c9980-78f2-11eb-9ead-82c34d5c9b9f.png)
 
+
+
 * **Chan! Problem solved!**
     ![issue_output](https://user-images.githubusercontent.com/64980133/109107598-030fbb00-7700-11eb-9f92-a0a94f7433c1.png)
+
 
 
 <h3 id = "s3">3. App's Limitations</h3>
@@ -66,9 +76,12 @@ This is a project where you can solve the ultimate pit limit problem by performi
         * *1 - 5 pattern:* which means that if you want to mine a block below the surface, you need to extract 5 blocks avobe that block
         * *1 - 9 pattern:* same meaning
     
-    **Therefore, we can implement the overall slope angle feature that will be used to set precedences** There are papers to follow that issue.
+    **Therefore, we can implement the overall slope angle feature that will be used to set precedences.** There are papers to follow that issue.
 
 <h3 id = "s4">4. Future development</h3>
 
--  [R. Khalokakaie, P. A. Dowd & R. J. Fowell in 2001](https://www.tandfonline.com/doi/abs/10.1179/mnt.2000.109.2.77) wrote a paper where they add variable slope angles in LG algorithm. **I am trying to follow the paper to add that feature** So you can play and **HOPE IT HELPS!**
+-  [R. Khalokakaie, P. A. Dowd & R. J. Fowell in 2001](https://www.tandfonline.com/doi/abs/10.1179/mnt.2000.109.2.77) wrote a paper where they add variable slope angles in LG algorithm. 
+
+
+**I am trying to follow the paper to add that feature** So you can play and **HOPE IT HELPS!**
 
