@@ -4,13 +4,13 @@ This is a project where you can solve the ultimate pit limit problem by performi
 
 <h2> Content </h2>
 
-* [1. What is Ford and Fulkerson?](#s1)
+* [1. What is Ford and Fulkerson Algorithm?](#s1)
 * [2. Features of the app](#s2)
 * [3. Project Limitations ](#s3)
 * [4. Future development ](#s4)
 
 
-<h3 id = "s1"> 1. What is Ford and Fulkerson? </h3>
+<h3 id = "s1"> 1. What is Ford and Fulkerson Algorithm? </h3>
 
 > Must read articles 
  - *"A proposal to find the ultimate pit using Ford Fulkerson algorithm"* [(link)](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext)
