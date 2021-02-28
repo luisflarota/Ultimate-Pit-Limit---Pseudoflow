@@ -73,7 +73,7 @@ This is a project where you can solve the ultimate pit limit problem by performi
 
 * **Precedences Pattern**:
     - The proper project just have 2 features for precedences:
-        * *1 - 5 pattern:* which means that if you want to mine a block below the surface, you need to extract 5 blocks avobe that block
+        * *1 - 5 pattern:* which means that if you want to mine a block below the surface, you need to extract 5 blocks above that block
         * *1 - 9 pattern:* same meaning
     
     **Therefore, we can implement the overall slope angle feature that will be used to set precedences.** There are papers to follow that issue.
@@ -83,5 +83,5 @@ This is a project where you can solve the ultimate pit limit problem by performi
 -  [R. Khalokakaie, P. A. Dowd & R. J. Fowell in 2001](https://www.tandfonline.com/doi/abs/10.1179/mnt.2000.109.2.77) wrote a paper where they add variable slope angles in LG algorithm. 
 
 
-**I am trying to follow the paper to add that feature** So you can play and **HOPE IT HELPS!**
+**I am trying to follow the paper to add that feature**. So you can play and **HOPE IT HELPS!**
 
