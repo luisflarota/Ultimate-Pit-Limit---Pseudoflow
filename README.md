@@ -1,5 +1,7 @@
 # Ultimate Pit Limit Solved by Using Pseudoflow Algorithm
 
+> Please, reference this work!
+
 This is a project where you can solve the ultimate pit limit problem by performing the pseudoflow algorithm created by Dr. Hochbaum. Thus, if you want to clone it, run cmd on your folder and write `<streamlit run app.py>`.
 
 <h2> Content </h2>
