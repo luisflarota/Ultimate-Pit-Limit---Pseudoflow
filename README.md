@@ -1,43 +1,8 @@
----
-layout: post
-mathjax: true
-comments: true
-title: <b>Solving the Ultimate Pit Limit Problem by Applying the Pseudoflow Algorithm</b>
-date: 2020-04-25
-# keywords: "Jalpc,Jekyll,gh-pages,website,blog,easy"
-categories: [projects]
-tags: [Python,UPL Mining]
-# icon: icon-html
----
+<b>Solving the Ultimate Pit Limit Problem by Applying the Pseudoflow Algorithm</b>
 
-<div style='text-align:center'><em>"Know how to solve every problem that has been solved." - R. Feynman (1988)</em></div>
-<br>
-<br>
-<head>
-<style>
-.gunimage {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 15%;
-}
-.half {
-  width:50%;
-  float: left;
-}
-#images {
-  text-align: center;
-  width: 100%;
-}
-div.section_header {
-  font-size: x-large;
-  color: rgb(30,144,255);
-}
-</style>
-</head>
-
+<div style='text-align:center'><em>"Know how to solve every problem that has been solved." - R. Feynman (1988)</em>
 ``Programming Language: Python``
-[[Link App]](https://github.com/chihyaoma/cyclical-visual-captioning){:target="\_blank"}
+[[Link App]](https://github.com/chihyaoma/cyclical-visual-captioning)
 
 --- 
 
@@ -48,12 +13,11 @@ div.section_header {
 [3. The Solution ](#s3) <br>
 [4. Building an Application](#s4) <br>
 [5. Future Work Ideas](#s5) <br>
-[6. Code!](#s6) <br>
-
+[6. References](#s6) <br>
 ----
 
 <h2 id = "s1"> 1. Some Introduction </h2>
-Mining Engineers, <u>and this is my kindly opinion</u>, have learned about solving the Ultimate Pit Limit Problems by easy examples, i.e., Lerchs-Grossman 2D Algorithm. However, that is not what we actually see when running an open-pit mining operation. Most of the current problems, including this, have been solved by software programs, and some mining engineers become users rather than doers. That being said, I decided to code the solution of the ultimated pit limit problem by applying the Pseudoflow algorithm (Hochbaum, 2008  <a href="https://hochbaum.ieor.berkeley.edu/html/pub/Hochbaum-OR.pdf" target="_blank">\[{% increment ref_count %}\]</a>).
+Mining Engineers, <u>and this is my kindly opinion</u>, have learned about solving the Ultimate Pit Limit Problems by easy examples, i.e., Lerchs-Grossman 2D Algorithm. However, that is not what we actually see when running an open-pit mining operation. Most of the current problems, including this, have been solved by software programs, and some mining engineers become users rather than doers. That being said, I decided to code the solution of the ultimated pit limit problem by applying the Pseudoflow algorithm (Hochbaum, 2008).
 
 ----
 
@@ -74,7 +38,7 @@ Given a 3D block model, how do we find the economic envelope/volume that contain
 
 <h2 id = "s3"> 3. The Solution </h2>
 
-The solution follows a paper from <b>Geovia Whittle, published in 2017</b>. They explain how the Pseudoflow algorithm works in detail (Geovia, 2017 <a href="https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/GEOVIA/PDF/whitepaper/2017-GEOVIA-WHITEPAPER-PSEUDOFLOW.pdf" target="_blank">\[{% increment ref_count %}\]</a>). To make life easier, this is a summary on how the algorithm works:
+The solution follows a paper from <b>Geovia Whittle, published in 2017</b>. They explain how the Pseudoflow algorithm works in detail (Geovia, 2017). To make life easier, this is a summary on how the algorithm works:
 
 1- Estimate **each block's value** based on economic parameters:<br>
 ~~~python
@@ -95,7 +59,7 @@ for block in [1 ... Blocks]:
       * Block -> block: `if allowed by the precedence, i.e, 1-5 precedence (45 degrees)`; the edge's weight will be the block value.
       * Block -> sink: `if the block's value is negative`; the edge's weight will be the block value (negative).
 
-  Hint: You can use ['Networkx'](https://networkx.org/){:target="\_blank"} to build your graph or do it by your own using dictionaries in Python.
+  Hint: You can use ['Networkx'](https://networkx.org/) to build your graph or do it by your own using dictionaries in Python.
 
 ~~~python
 def create_graph(self, bmodel, precedence):
@@ -140,7 +104,7 @@ def create_edges(self,Graph,up, low, trigger, prec, dist):
             Graph.add_edge(0, node, const = cap_abs, mult = 1)
 ~~~
 
-3- The algorithm will **push the flow** from the source to an **ore node** and it will **try to saturate the capacity**. Furthermore, it will **push from the waste node to pay waste blocks**. Therefore, as the maximum flow is found, the problem is solved and that will mean that waste blocks were paid. The following chart extracted from ['Whittle's paper'](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext){:target="\_blank"} would help you better understand what is written above: 
+3- The algorithm will **push the flow** from the source to an **ore node** and it will **try to saturate the capacity**. Furthermore, it will **push from the waste node to pay waste blocks**. Therefore, as the maximum flow is found, the problem is solved and that will mean that waste blocks were paid. The following chart extracted from ['Whittle's paper'](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext) would help you better understand what is written above: 
 
 {% include table.html img1="https://user-images.githubusercontent.com/64980133/109393667-16ce4380-78f1-11eb-95c2-79ff26e7b057.png" description1="Flow going through the graph"%}
         
@@ -148,7 +112,7 @@ def create_edges(self,Graph,up, low, trigger, prec, dist):
 
 <h2 id = "s4"> 4. Building an Application </h2>
 
-To solve this problem dynamically, and also to make people playing with it, a web application has been created by using [Streamlit](https://streamlit.io/){:target="\_blank"}.
+To solve this problem dynamically, and also to make people playing with it, a web application has been created by using [Streamlit](https://streamlit.io/).
 
 Features of the Application:
 
@@ -183,28 +147,13 @@ Features of the Application:
 - <ins>Add a variety of slope angles</ins>. At this point in time, we are just evaluating 2 precedences which are equivalent to 45 and 40 degrees approximately.
 - <ins>Evaluate a set of revenue factors</ins> and see where to mine first - which nested pit has the highest value. Also, <ins>visualize it</ins>.
 - Use some Operations Research techniques to <ins>draw automated inpit and expit ramps</ins>. Dr. Yarmuch developed an algorithm to solve this problem and 
-his [paper](https://www.sciencedirect.com/science/article/abs/pii/S030505481930173X){:target="\_blank"} is worth reading.
+his [paper](https://www.sciencedirect.com/science/article/abs/pii/S030505481930173X) is worth reading.
 
 
 
 ---
-
-<h2 id = "s6"> 6. Code </h2>
-<div id="images">
-  <div class="half">
-  <a href="https://github.com/luisflarota/Ultimate-Pit-Limit---Pseudoflow" target="_blank">
-    <img class="gunimage" alt="idk" src="../../../../static/assets/img/blog/github-icon.png?raw=true">
-    <p>GitHub</p>
-  </a>
-  </div>
   
-</div>
-<div style="clear: both;"></div>
+  
+<h2 id = "s6"> 6. References </h2>
 
-
-<style>
-  /* overwrite mains max width so vis can use full width */
-  img {
-    max-width:100%;
-  }
-</style>
+ - 
