@@ -138,6 +138,7 @@ Features of the Application:
 
 <br>
 * <ins>Run the Algorithm and visualize your **beatiful pit limit**</ins>
+  
 ![issue_output](https://user-images.githubusercontent.com/64980133/109107598-030fbb00-7700-11eb-9f92-a0a94f7433c1.png)
 
 ---
