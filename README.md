@@ -1,8 +1,7 @@
-<b>Solving the Ultimate Pit Limit Problem by Applying the Pseudoflow Algorithm</b>
+# Solving the Ultimate Pit Limit Problem by Applying the Pseudoflow Algorithm 
 
 <div style='text-align:center'><em>"Know how to solve every problem that has been solved." - R. Feynman (1988)</em>
 ``Programming Language: Python``
-[[Link App]](https://github.com/chihyaoma/cyclical-visual-captioning)
 
 --- 
 
@@ -31,8 +30,8 @@ Mining Engineers, <u>and this is my kindly opinion</u>, have learned about solvi
 
 Given a 3D block model, how do we find the economic envelope/volume that contains the maximum value and fits in within our operational constraints? i.e. maximum slope angles?
 
-{% assign ref_count = 1 %}
-{% include table.html img1="/images/pseudo/bm.png" img2="/images/pseudo/up_.png" description1="3D Block Model" description2="Ultimate Pit Limit" %}
+![bm](https://user-images.githubusercontent.com/64980133/180667596-10ac9bf8-094a-431e-84dc-6a197d4aa083.png)
+![up_](https://user-images.githubusercontent.com/64980133/180667604-5f10c4c0-ce63-4ed6-a301-59c655b92734.png)
 
 ----
 
@@ -106,7 +105,7 @@ def create_edges(self,Graph,up, low, trigger, prec, dist):
 
 3- The algorithm will **push the flow** from the source to an **ore node** and it will **try to saturate the capacity**. Furthermore, it will **push from the waste node to pay waste blocks**. Therefore, as the maximum flow is found, the problem is solved and that will mean that waste blocks were paid. The following chart extracted from ['Whittle's paper'](https://www.scielo.br/scielo.php?pid=S0370-44672014000400006&script=sci_arttext) would help you better understand what is written above: 
 
-{% include table.html img1="https://user-images.githubusercontent.com/64980133/109393667-16ce4380-78f1-11eb-95c2-79ff26e7b057.png" description1="Flow going through the graph"%}
+![Screenshot 2021-02-27 114317](https://user-images.githubusercontent.com/64980133/109393667-16ce4380-78f1-11eb-95c2-79ff26e7b057.png)
         
 --- 
 
@@ -125,21 +124,22 @@ Features of the Application:
 
 * <ins>3D Visualization:</ins> Select some lower and upper bounds for what you want to see and grades' ranges and we will color-code based on it.
 
-{% include table.html img1="https://user-images.githubusercontent.com/64980133/109393924-5f3a3100-78f2-11eb-86dc-bb77fcb2518c.png" description1="3D Block Model Visualization" %}
+![visualize](https://user-images.githubusercontent.com/64980133/109393924-5f3a3100-78f2-11eb-86dc-bb77fcb2518c.png)
 
 <br>
 * <ins>GradeTonnage Distribution </ins>
 
-{% include table.html img1="https://user-images.githubusercontent.com/64980133/109393968-8ee93900-78f2-11eb-88e4-9d3fbe7ac45f.png" description1="Grade-Tonnage Distribution"%}
+![gtd](https://user-images.githubusercontent.com/64980133/109393968-8ee93900-78f2-11eb-88e4-9d3fbe7ac45f.png)
 
 <br>
 * <ins>Input the economic parameters to get the blocks' value</ins>
 
-{% include table.html img1="https://user-images.githubusercontent.com/64980133/109394014-cb1c9980-78f2-11eb-9ead-82c34d5c9b9f.png" description1="User Inputs - Economic Parameters"%}
+![upl](https://user-images.githubusercontent.com/64980133/109394014-cb1c9980-78f2-11eb-9ead-82c34d5c9b9f.png)
 
 <br>
 * <ins>Run the Algorithm and visualize your **beatiful pit limit**</ins>
-{% include table.html img1="https://user-images.githubusercontent.com/64980133/109107598-030fbb00-7700-11eb-9f92-a0a94f7433c1.png" description1="User Inputs - Economic Parameters"%}
+![issue_output](https://user-images.githubusercontent.com/64980133/109107598-030fbb00-7700-11eb-9f92-a0a94f7433c1.png)
+
 ---
 
 <h2 id = "s5"> 5. Future Work Ideas </h2>
@@ -156,4 +156,6 @@ his [paper](https://www.sciencedirect.com/science/article/abs/pii/S0305054819301
   
 <h2 id = "s6"> 6. References </h2>
 
- - 
+ - Hochbaum, D. S. (2008). The pseudoflow algorithm: A new algorithm for the maximum-flow problem. Operations research, 56(4), 992-1009.
+ - Souza, F. R., Melo, M., & Pinto, C. L. L. (2014). A proposal to find the ultimate pit using Ford Fulkerson algorithm. Rem: Revista Escola de Minas, 67, 389-395.
+ - Yarmuch, J. L., Brazil, M., Rubinstein, H., & Thomas, D. A. (2020). Optimum ramp design in open pit mines. Computers & Operations Research, 115, 104739.
