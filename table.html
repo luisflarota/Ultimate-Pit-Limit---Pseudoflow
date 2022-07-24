@@ -1,0 +1,157 @@
+<div style="padding: 10px; border-radius: 10px; border-color: black; border-style: solid; border-width: thin;" >
+  <table>
+    <thead>
+      <tr>
+        {% for i in (1..10) %}
+          {% case i %}
+            {% when 1 %}
+              {% if include.img1 %}
+                <th style="text-align: center"><img src="{{ include.img1 }}" alt="{{ include.description1 }}"></th>
+                {% if include.img2 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 2 %}
+              {% if include.img2 %}
+                <th style="text-align: center"><img src="{{ include.img2 }}" alt="{{ include.description2 }}"></th>
+                {% if include.img3 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 3 %}
+              {% if include.img3 %}
+                <th style="text-align: center"><img src="{{ include.img3 }}" alt="{{ include.description3 }}"></th>
+                {% if include.img4 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 4 %}
+              {% if include.img4 %}
+                <th style="text-align: center"><img src="{{ include.img4 }}" alt="{{ include.description4 }}"></th>
+                {% if include.img5 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 5 %}
+              {% if include.img5 %}
+                <th style="text-align: center"><img src="{{ include.img5 }}" alt="{{ include.description5 }}"></th>
+                {% if include.img6 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 6 %}
+              {% if include.img6 %}
+                <th style="text-align: center"><img src="{{ include.img6 }}" alt="{{ include.description6 }}"></th>
+                {% if include.img7 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 7 %}
+              {% if include.img7 %}
+                <th style="text-align: center"><img src="{{ include.img7 }}" alt="{{ include.description7 }}"></th>
+                {% if include.img8 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 8 %}
+              {% if include.img8 %}
+                <th style="text-align: center"><img src="{{ include.img8 }}" alt="{{ include.description8 }}"></th>
+                {% if include.img9 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 9 %}
+              {% if include.img9 %}
+                <th style="text-align: center"><img src="{{ include.img9 }}" alt="{{ include.description9 }}"></th>
+                {% if include.img10 %}
+                  <th style="text-align: center">&nbsp;</th>
+                {% endif %}
+              {% endif %}
+            {% when 10 %}
+              {% if include.img10 %}
+                <th style="text-align: center"><img src="{{ include.img10 }}" alt="{{ include.idescription0 }}"></th>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody style="border: none">
+      <tr>
+        {% for i in (1..10) %}
+          {% case i %}
+            {% when 1 %}
+              {% if include.img1 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description1 }}</em></td>
+                {% if include.img2 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 2 %}
+              {% if include.img2 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description2 }}</em></td>
+                {% if include.img3 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 3 %}
+              {% if include.img3 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description3 }}</em></td>
+                {% if include.img4 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 4 %}
+              {% if include.img4 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description4 }}</em></td>
+                {% if include.img5 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 5 %}
+              {% if include.img5 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description5 }}</em></td>
+                {% if include.img6 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 6 %}
+              {% if include.img6 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description6 }}</em></td>
+                {% if include.img7 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 7 %}
+              {% if include.img7 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description7 }}</em></td>
+                {% if include.img8 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 8 %}
+              {% if include.img8 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description8 }}</em></td>
+                {% if include.img9 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 9 %}
+              {% if include.img9 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description9 }}</em></td>
+                {% if include.img10 %}
+                  <td style="text-align: center">&nbsp;</td>
+                {% endif %}
+              {% endif %}
+            {% when 10 %}
+              {% if include.img10 %}
+                <td style="text-align: center"><em style="font-size: 0.8em">{{ include.description10 }}</em></td>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+  {% if include.description %}
+
+  {% endif %}
+</div>
