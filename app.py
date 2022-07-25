@@ -1,13 +1,15 @@
-import streamlit as st
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go 
-from scipy import spatial
-from statistics import mode 
-import pandas as pd 
-import back
 import re
+from statistics import mode
+
+import numpy as np
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
 from plotly.subplots import make_subplots
+
+import back
+
 global colors
 colors = ["#F9E79F", '#82E0AA', '#922B21', '#08056B', '33FFF4', 'FC33FF', 'FF8333', '070300']
 #ranges = [[-1000000,0], [0,30000], [30000,1000000]]
@@ -30,10 +32,8 @@ def main():
         if file_:
             load_file(file_)
 
-
 def load_file(file_model):
     if file_model:
-        
         separator = st.sidebar.radio('*csv file delimiter:', (',', ';'))
         if separator is not None:
             #We are calling the block model here:
@@ -41,12 +41,15 @@ def load_file(file_model):
             x = st.sidebar.selectbox('X coordinate:', model.columns())
             y = st.sidebar.selectbox('Y coordinate:', model.columns())
             z = st.sidebar.selectbox('Z coordinate:', model.columns())
-            grade = st.sidebar.selectbox('Main Grade:', model.columns())
+            grade = st.sidebar.selectbox('Main Grade:', model.columns(), help='Please, units of grades must be in percentage')
             density = st.sidebar.selectbox('Density:', model.columns())
             
             #Load archive:
             if st.sidebar.checkbox('Load'):
-                analize(model, x,y,z, grade, density)
+                try:
+                    analize(model, x,y,z, grade, density)
+                except:
+                    st.info('Check your data carefully, i.e., units, coordinates, etc.')
 
         
 
@@ -59,25 +62,24 @@ def analize(model,x,y,z, grade,density):
     st.write('{} blocks in Z'.format(model.zlong))
     total_block_times = model.long
     if total_block_times != model.summary_2():
-        st.success('Message: You need to have {} blocks. However, you got {} blocks'.format(total_block_times, model.bmodel.shape[0]))
-        if st.checkbox('Check outliers and coordinates that are not in the block center:'):
+        st.warning('Message: You need to have {:,.0f} blocks. However, you got {:,.0f} blocks'.format(total_block_times, model.bmodel.shape[0]))
+        if st.checkbox('Check outliers in the block model:'):
             #Cleanning gets [outliers]
             outliers = model.cleanning()
-            st.write('I am taking out the following rows:')
+            st.write('I am taking out the following blocks:')
             st.dataframe(outliers)
-            
+            print(outliers)
             #Asking one more time, if it wants to re-analyze de file
             analyze_again = st.radio('Analyze again?:', ['No', 'Yes'])
             if analyze_again == 'Yes':
-                st.markdown('<i class="material-icons">If you can not move forward, pls check your csv file by your own!</i>', unsafe_allow_html=True)
                 model = back.blockmodel(model.bmodel)
                 analize(model, x,y,z, grade, density)
-            
+                
     #If number of blocks = to unique values on x,y,z then:
     elif total_block_times == model.summary_2():
-        st.success('Based on the file, # blocks = # rows')
+        st.success('Awesome! Now, # blocks = # rows')
         #Calling visualizer that needs more development (blocks sizing)
-        if st.checkbox('Visualize block model'):
+        if st.checkbox('3D Block model visualization'):
             visualize_model(model, x,y,z, grade, density)
         if st.checkbox('Get Grade-Tonnage Distribution'):
             if type(grade) == str:
@@ -86,36 +88,34 @@ def analize(model,x,y,z, grade,density):
             select_mgrade = st.selectbox('Select your main grade:', grade)
             st.plotly_chart(call_grade_tonnage(model, select_mgrade, density))   
             if st.checkbox('Get the Ultimate Pit Limit'):
-                m_c = st.number_input('Mining Cost (USD/Ton.)')  #(USD/ Ton.)
+                m_c = st.number_input('Mining Cost (USD/Ton.)', value = 4)  #(USD/ Ton.)
                 opt_increm = st.selectbox('Incremental Cost?', ['Yes', 'No'])
                 if opt_increm == 'Yes':    
-                    i_c  = st.text_input('Incremental Cost (USD/ton.)') #(USD/ Ton./ meter deep)
+                    i_c  = st.text_input('Incremental Cost (USD/ton.)', help='Does the mining cost increment while going deep? This is added to the mining cost while going 1 meter deep.',value = 0.01) #(USD/ Ton./ meter deep)
                 else:
                     i_c = 0
-        
-                p_c  = st.number_input('Processing Cost (USD/ton.)')  #(USD/ Ton.)
-                t_c = st.number_input('Treatment Cost (USD/lb.)')  #(USD/ lb.)
-                m_p = st.number_input('Metal Price (USD/lb.)')  #(USD/ lb.)
-                m_r = st.number_input('Metal Recovery (<1)') #
-                prec = st.selectbox('Select block precedences:', ['1-5 pattern','1-9 pattern'], key= 'the_prec')
+                p_c  = st.number_input('Processing Cost (USD/ton.)', value = 9)  #(USD/ Ton.)
+                t_c = st.number_input('Treatment Cost (USD/lb.)', value = 0.1)  #(USD/ lb.)
+                m_p = st.number_input('Metal Price (USD/lb.)', value = 3.1)  #(USD/ lb.)
+                m_r = st.number_input('Metal Recovery (<1)', value = 0.9) #
+                prec = st.selectbox('Select block precedences:', ['1-5 pattern','1-9 pattern'], key= 'the_prec', help='45 degrees if 105 pattern, 40 degrees otherwise.')
 
                 if st.button('Solve the Ultimate Pit Limit problem'):
                     model_solve = model.upl(x,y,z, select_mgrade, density, m_c, float(i_c), p_c, t_c, m_p, m_r, prec)
-                    return st.plotly_chart(visualize_upl(model_solve, x,y,z, select_mgrade, rang_def, colors))
+                    return st.plotly_chart(visualize_upl(model_solve, x,y,z, select_mgrade, rang_def, colors),use_container_width=True)
+
 
 def visualize_model(model, x,y,z, grade, density):
-    x_slider =  st.slider('X Range:', model.minx, model.maxx, (model.minx, model.minx + 5*model.modex), model.modex)
-    y_slider =  st.slider('Y Range:', model.miny, model.maxy, (model.miny, model.miny + 5*model.modey), model.modey)
-    z_slider =  st.slider('Z Range:', model.minz, model.maxz, (model.minz, model.minz + 5*model.modez), model.modez)
-
-    text_1 = 'Select ranges with 1 decimal  -   i.e., 0.1, 0.2, 0.3, 2.0 (max. 8 numbers)'
+    st.warning('Select the portion of the block model you want to see:')
+    x_slider =  st.slider('Range for X coordinates:', model.minx, model.maxx, (model.minx, model.minx + 5*model.modex), model.modex)
+    y_slider =  st.slider('Range for Y coordinates:', model.miny, model.maxy, (model.miny, model.miny + 5*model.modey), model.modey)
+    z_slider =  st.slider('Range for Z coordinates:', model.minz, model.maxz, (model.minz, model.minz + 5*model.modez), model.modez)
+    st.warning('How do you want to split grades?:')
+    text_1 = 'Select ranges with only 1 decimal - i.e., 0.1, 0.2, 0.3, 2.0 (max. 8 numbers)'
+    st.write(text_1)
     p_compile = re.compile(r'\d+\.\d+')
-
-    #st.success(text_1)
-    st.success(text_1)
-    min_grade = round(min(model.bmodel.loc[:, grade]),3)
-    max_grade = round(max(model.bmodel.loc[:, grade]),3)
-    ranges = st.text_input('Minimun {} grade is: {}, and maximum one is: {}'.format(grade, min_grade, max_grade))
+    min_grade, max_grade = min_max(model.bmodel, x,y,z, x_slider, y_slider, z_slider, grade)
+    ranges = st.text_input('Minimun grade is: {}, and maximum one is: {}'.format(min_grade, max_grade))
     # Compile a pattern to capture float values
     # Convert strings to float
     # Asking to visualize
@@ -125,6 +125,14 @@ def visualize_model(model, x,y,z, grade, density):
         floats = list_maker(floats)
         st.plotly_chart(visualize(model.bmodel, x,y,z, x_slider, y_slider, z_slider, grade, floats, density, colors))
 
+# Min_max to plot grade distribution
+def min_max(model, x,y,z, x_slider, y_slider, z_slider, grade):
+    for_plot = model.loc[((model.loc[:, x]>= x_slider[0]) & (model.loc[:,x] <= x_slider[1])) & \
+        ((model.loc[:,y]>= y_slider[0]) & (model.loc[:,y] <= y_slider[1]))&\
+            ((model.loc[:,z]>= z_slider[0]) & (model.loc[:,z] <= z_slider[1]))]
+    min_ = round(min(for_plot.loc[:, grade]),3)
+    max_ = round(max(for_plot.loc[:, grade]),3)        
+    return min_,max_
 #Visualizing the whole, remember to use . as decimal separator
 def visualize(model, x,y,z, x_slider, y_slider, z_slider, grade, floats, density, colors):
     i = 0
@@ -144,7 +152,7 @@ def visualize(model, x,y,z, x_slider, y_slider, z_slider, grade, floats, density
         fig.add_trace(go.Scatter3d(x = data_plot.loc[:, x], y = data_plot.loc[:,y], z = data_plot.loc[:,z], text= data_plot.loc[:,'g'],mode = 'markers'\
                                 , name = name_legend, marker = dict(color = colors[i], symbol = 'square', size = 4), showlegend = True))
         i+=1
-        title = '<b>Block model for {} grade</b>'.format(grade)
+    title = '<b>Grade Distribution in the Block Model </b>'
 
     fig.update_layout(margin = dict(r=100, t=25, b=40, l=100), title = title)
     
@@ -174,7 +182,7 @@ def call_grade_tonnage(model, grade, density):
     fig1.add_trace(go.Scatter(x = grade_ton_dist['Cutoff_grade'], y = grade_ton_dist['GTon_a_cutoff'], name = 'Tonnage (Gtons.)  vs. Cut-off grade (%)'), secondary_y = False) 
     fig1.add_trace(go.Scatter(x = grade_ton_dist['Cutoff_grade'], y = grade_ton_dist['Cut_Grade'], name = 'Avg. grade (%) vs Cut-off grade (%)'), secondary_y = True)
     fig1.update_xaxes(title_text = "<b>Cut-off grade (%)<b>")
-    fig1.update_yaxes(title_text="<b>Tonnage (Gtons.)</b>", secondary_y =False)
+    fig1.update_yaxes(title_text="<b>Tonnage (GT.)</b>", secondary_y =False)
     fig1.update_yaxes(title_text="<b>Avg. grade (%)</b>", secondary_y =True)
     fig1.update_layout(title = title)
     model.bmodel = modelo
@@ -192,15 +200,16 @@ def list_maker(lista):
     return list_ranges
 
 
-
-
 def visualize_upl(model, xcol, ycol, zcol, grade, ranges, colors):
     i = 0
-    fig = make_subplots(rows = 6, cols = 2, specs = [[{'type': 'scatter3d', 'rowspan':4, 'colspan':2}, None],
+    fig = make_subplots(rows = 9, cols = 2, specs = [[{'type': 'scatter3d', 'rowspan':6, 'colspan':2}, None],
                                                 [None, None],
                                                 [None, None],
                                                 [None, None],
-                                                [{'type': 'bar', 'rowspan':2,'colspan':2}, None],
+                                                [None, None],
+                                                [None, None],
+                                                [{'type': 'bar', 'rowspan':3,'colspan':2}, None],
+                                                [None, None],
                                                 [None, None]])
     #set ranges with colors:
     for value in ranges:
@@ -215,19 +224,19 @@ def visualize_upl(model, xcol, ycol, zcol, grade, ranges, colors):
         name_legend = str(before) + " <=" + grade +"< " +str(after)
         fig.add_trace(go.Scatter3d(x = data_plot.loc[:,xcol], y = data_plot.loc[:,ycol], z = data_plot.loc[:,zcol], text= data_plot.loc[:,'g'],mode = 'markers'\
                                 , name = name_legend, marker = dict(color = colors[i], symbol = 'square', size = 4), showlegend = True))
-        fig.add_trace(go.Bar(x = [name_legend], y = [freq], marker=dict(color = colors[i]), showlegend = False, name = '', text = [freq], textposition = 'auto'), row = 5, col=1)
+        fig.add_trace(go.Bar(x = [name_legend], y = [freq], marker=dict(color = colors[i]), showlegend = False, name = '', text = [freq], textposition = 'auto'), row = 7, col=1)
         i+=1
 
     #Include the precedence in the title!!!!!
     fig.update_layout(title = '<b>Ultimate Pit Limit</b>' + '<br>'+ \
                   '<i>Undiscounted value ot the pit: </i>'+ '<b>USD {0:,.2f}</b>'.format(model.iloc[:,4].sum()),
-                 annotations = [{'font': {'size':14},'text': '<b>Histogram for grades within the ultimate pit limit</b>', 'x': 0.46, 'showarrow': False, 'y': 0.40, 
+                 annotations = [{'font': {'size':14},'text': '<b>Histogram for grades within the ultimate pit limit</b>', 'x': 0.2, 'showarrow': False, 'y': 0.30, 
                                     'xanchor': 'center', 'xref': 'paper', 'yanchor':'bottom', 'yref': 'paper'}],
                  yaxis2 = {'anchor': 'x2', 'domain': [0.0, 0.5]},
                  legend = dict(x = 1.0, y = 1.0, font = dict(size = 13)))
 
-    fig.update_yaxes(title_text = 'Frequency', row = 5, col = 1)
-    fig.update_xaxes(title_text = 'Grade Ranges', row = 5, col = 1)
+    fig.update_yaxes(title_text = 'Frequency', row = 9, col = 1)
+    fig.update_xaxes(title_text = 'Grade Ranges', row = 9, col = 1)
     return fig
 if __name__ ==  '__main__':
     main()

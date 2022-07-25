@@ -1,14 +1,12 @@
-import streamlit as st
-import pseudoflow as pf
+from statistics import mode
+
+import networkx as NetX
 import numpy as np
-import networkx as NetX 
-import plotly.express as px
-import plotly.graph_objects as go 
-from scipy import spatial
-from statistics import mode 
-import pandas as pd 
-from PIL import Image
+import pandas as pd
+import pseudoflow as pf
 from plotly.subplots import make_subplots
+from scipy import spatial
+
 
 #transfering csv w/blockmodel to backend
 class blockmodel(object):
@@ -97,9 +95,6 @@ class blockmodel(object):
         for a,b,c in zip(out[:,0], out[:,1], out[:,2]):
             delete = self.bmodel.loc[(self.x == a) & (self.y == b) & (self.z == c)]
             self.bmodel = self.bmodel.drop(delete.index)
-        
-         
-        
         return pd.DataFrame(self.outliers, columns = cols)
 
     #Solving UPL problem
